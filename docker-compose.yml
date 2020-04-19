@@ -1,0 +1,24 @@
+version: '3'
+services:
+    web:
+        container_name: "web_project"
+        env_file:
+            - .env_flask
+        build: .
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/flask
+        depends_on:
+            - psql
+        expose:
+            - 5000
+    psql:
+        container_name: "psql_project"
+        image: postgres
+        ports:
+          - "5433:5433"
+        env_file:
+          - .env_psql
+        expose:
+          - 5433
