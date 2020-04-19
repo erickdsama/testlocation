@@ -8,8 +8,8 @@ class Vehicle(db.Model, ModelJson):
     __tablename__ = "vehicle"
 
     id = db.Column(db.Integer, primary_key=True)
-    vin = db.Column(db.String, nullable=True)
-    plate = db.Column(db.String, nullable=True)
+    vin = db.Column(db.String(18), nullable=True)
+    plate = db.Column(db.String(10), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     deleted = db.Column(db.Boolean, default=False)

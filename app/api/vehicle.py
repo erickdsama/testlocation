@@ -50,10 +50,10 @@ def last_location(vehicle_id):
     vehicle = database.get(id=vehicle_id)
     if not vehicle:
         return jsonify({"error": True, "message": "vehicle not found"}), 404
-    last_location = vehicle.locations.order_by(Location.time_created.desc()).first()
-    if not last_location:
+    last_location_data = vehicle.locations.order_by(Location.time_created.desc()).first()
+    if not last_location_data:
         return jsonify({"error": True, "message": "location not found"}), 404
-    return last_location.to_json()
+    return last_location_data.to_json()
 
 
 @api.route('/get_my_vehicles', methods=["GET"])
