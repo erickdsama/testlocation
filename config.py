@@ -22,7 +22,8 @@ class Config(object):
 class DevelopmentConfig(Config):
     DEBUG = True
     JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(days=15)
-    SQLALCHEMY_DATABASE_URI = "postgresql://project@psql/project"
+
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:t3sting$20@test.cm3atlknp5l3.us-east-1.rds.amazonaws.com/project"
 
 class TestingConfig(Config):
     TESTING = True

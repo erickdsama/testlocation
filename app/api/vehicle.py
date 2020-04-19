@@ -1,6 +1,5 @@
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from sqlalchemy_utils.types.json import json
 
 from app import db
 from app.models import Vehicle, AdminUser
@@ -49,10 +48,13 @@ def get_vehicle(vehicle_id):
 @jwt_required
 def last_location(vehicle_id):
     vehicle = database.get(id=vehicle_id)
+    if not vehicle:
+        return jsonify({"error": True, "message": "vehicle not found"}), 404
     last_location = vehicle.locations.order_by(Location.time_created.desc()).first()
     if not last_location:
         return jsonify({"error": True, "message": "location not found"}), 404
     return last_location.to_json()
+
 
 @api.route('/get_my_vehicles', methods=["GET"])
 @jwt_required
